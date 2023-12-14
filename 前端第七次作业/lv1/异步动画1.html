@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            border-radius: 50px;
+            position: absolute;
+        }
+        #c1{
+            background-color: blue;
+        }
+        #c2{
+            background-color: black;
+            top: 200px;
+        }
+        #c3{
+            background-color: blueviolet;
+            top: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div id="c1"></div>
+    <div id="c2"></div>
+    <div id="c3"></div>
+    <script>
+        let c1 = document.getElementById('c1')
+        let c2 = document.getElementById('c2')
+        let c3 = document.getElementById('c3')
+        var timer = null         //给定时器整个标签便于删除
+        function move (box,n){
+            if(box.offsetLeft >= 500){clearInterval(timer+n);}
+            else{box.style.left = box.offsetLeft + 10 + 'px'}
+        }//用来移动圆盒子的函数
+        setTimeout (()=>{
+            timer1=setInterval('move(c1,1)',20)
+            setTimeout(()=>{
+                timer2=setInterval('move(c2,2)',20)
+                setTimeout(()=>{
+                    timer3=setInterval('move(c3,3)',20)
+                },1000)
+            },1000);
+        },1000);//嵌套的定时器
+        </script>
+</body>
+</html>

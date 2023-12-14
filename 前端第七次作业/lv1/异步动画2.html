@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            border-radius: 50px;
+            position: absolute;
+        }
+        #c1{
+            background-color: blue;
+        }
+        #c2{
+            background-color: black;
+            top: 200px;
+        }
+        #c3{
+            background-color: blueviolet;
+            top: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div id="c1"></div>
+    <div id="c2"></div>
+    <div id="c3"></div>
+    <script>
+    let c1 = document.getElementById('c1')
+    let c2 = document.getElementById('c2')
+    let c3 = document.getElementById('c3')
+    var timer = null
+    function move (box){
+        return new Promise((resolve)=>{
+            timer = setInterval(()=>{
+            if(box.offsetLeft >= 500){clearInterval(timer);
+                resolve();}
+            else{box.style.left = box.offsetLeft + 10 + 'px';}
+        },30)
+    })
+    }//让函数返回的值为一个对象，然后使用.then方法
+    move(c1).then(()=>move(c2)).then(()=>move(c3))
+    </script>
+</body>
+</html>
