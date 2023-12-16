@@ -20,13 +20,14 @@
         function delay(time){
             return new Promise(resolve => setTimeout(resolve,time))
         }
-        async function addtext(){
-            for(let i = 0; i<poem.length; i++){
-                div1.innerText += poem[i]
-                await delay(100)
+        async function addtext(count){
+            if (count < poem.length) {
+            div1.innerText += poem[count];
+            await delay(100);
+            await addtext(count + 1);
             }
         }
-        addtext()
+        addtext(0)
     </script>
 </body>
 </html>
