@@ -1,0 +1,144 @@
+.header{
+    width: 100%;
+    height: 10vh;
+    border: 0px;
+    background-color: #FD544E;
+    display: flex;
+    justify-content: space-between;
+}
+.search{
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+.buttonback, .buttonforward {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.186);
+    color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 5px;
+  }
+  .searchframe {
+    height: 30px;
+    width: 200px;
+    border-radius: 15px;
+    border: 2px solid #ccc;
+  }
+  .user{
+    display: flex;
+    align-items: center;
+  }
+  .username{
+    color: white;
+    position: absolute;
+    right: 40px;
+  }
+  .head{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #fff;
+    position: absolute;
+    right: 100px;
+  }
+ /* 头部分的样式 */
+ .content{
+    display: flex;
+    height: 77vh;
+ }
+ .side{
+  border-right: 1px solid rgba(0, 0, 0, 0.193);
+  width: 100px;
+ }
+ /*侧边栏部分的样式*/
+ #main{
+  flex: 1;
+ }
+ #main>div{
+  display: none;
+ }
+ ul{
+  list-style: none;
+ }
+ #wrap{
+  overflow: hidden;
+  position: absolute;
+  left: 300px;
+  width: 800px;
+  height: 300px;
+ }
+ #wrap .img-list{
+  display: flex;
+  position: relative;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  transition: 0.5s ease;
+ }
+ #wrap .img-list img{
+  width: 100%;
+  cursor: pointer;
+ }
+ #wrap .arrow a {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  display: block;
+  width: 40px;
+  height: 70px;
+  background-color: rgba(0, 0, 0, 0.614);
+  color: rgb(255, 255, 255);
+  user-select: none;
+  font-size: 30px;
+  text-align: center;
+  line-height: 70px;
+  text-decoration: none;
+ }
+ #wrap .arrow a.left{
+  left: 0;
+ }
+ #wrap .arrow a.right{
+  right: 0;
+ }
+ .circle-list {
+  display: flex;
+  position: absolute;
+  bottom: 400px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 240px;
+  height: 40px;
+  z-index: 8;
+}
+.circle-list > .circle {
+  margin: 0 5px;
+  width: 30px;
+  height: 30px;
+  background-color: #ecf0f1;
+  border-radius: 50%;
+}
+
+.circle-list > .circle.active {
+  background-color: #e74c3c;
+}
+ /*主要内容区*/
+ .songplay{
+  height: 10vh;
+  border-top: 1px solid rgba(0, 0, 0, 0.193);
+  display: flex;
+  align-items: center;
+ }
+ .songphoto{
+  height: 50px;
+  width: 50px;
+  overflow: hidden;
+ }
+ .player span{
+  margin: 50px;
+ }
+ /*播放器*/
