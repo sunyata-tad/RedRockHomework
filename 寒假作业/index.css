@@ -54,6 +54,20 @@
  .side{
   border-right: 1px solid rgba(0, 0, 0, 0.193);
   width: 100px;
+  list-style-type: none;
+  text-align: center;
+ }
+ .side >li {
+  margin-top: 5px;
+  margin-bottom: 5px;
+ }
+ .side > li > a {
+  background-color: white;
+  text-decoration: none;
+  color: black;
+ }
+ .side > li > a:hover{
+  background-color: #ccc;
  }
  /*侧边栏部分的样式*/
  #main{
