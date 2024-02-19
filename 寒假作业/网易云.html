@@ -13,7 +13,7 @@
         <div class="search">
             <div class="buttonback"><</div>
             <div class="buttonforward">></div>
-            <div class="searchframe"></div><button><a class="sidebar-link" data-target="search">搜索</a></button>
+            <input type="text" class="searchframe"><button><a class="sidebar-link" data-target="search" onclick="searchsong()">搜索</a></button>
         </div>
         <div class="user">
             <div class="head"><a href="#" class="sidebar-link" data-target="personaldetails"><img src="#"></a></div>
@@ -69,12 +69,13 @@
 
     <div class="songplay">
         <div class="songphoto"><a class="sidebar-link" data-target="songdetails"><img src="logo.png"></a></div>
-        <div class="songname">111</div>
+        <div class="songname"></div>
         <div class="player">
-            <span class="previous"></span>
-            <span class="play"></span>
-            <span class="next"></span>
-            <div class="bar"></div>
+            <audio controls id="audioPlayer">
+                <source src="" type="audio/mp3">
+              </audio>
+              <button onclick="previousTrack()">|<</button>
+              <button onclick="nextTrack()">>|</button>
         </div>
     </div>
 

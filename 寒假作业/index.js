@@ -1,3 +1,16 @@
+//搜索功能
+async function searchsong() {
+  var input = document.getElementsByClassName('searchframe');
+  var keywords = input[0].value;
+  fetch('http://localhost:3000/search?keywords=${keywords}')
+  .then((response) => response.json())
+  .then((data) => {
+    var text = JSON.stringify(data);
+    console.log(text);
+  });
+}//获取歌曲信息
+'未写'
+//搜索界面
 //实现侧边栏功能的代码
 document.addEventListener("DOMContentLoaded", function() {
     const sidebarLinks = document.querySelectorAll('.sidebar-link'); // 获取所有的侧边栏链接
@@ -5,8 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const contentSections = main.querySelectorAll(':scope > *'); // 获取所有的内容区域,同时不获取其子元素
     document.getElementById('home').style.display = 'block';
     sidebarLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault(); // 阻止默认行为（如页面跳转）
+      link.addEventListener('click', () => {
         const targetId = link.getAttribute('data-target'); // 获取目标内容区域的 ID
         
         // 显示目标内容区域，隐藏其他内容区域
@@ -20,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     });
   });
-//轮播图
+//轮播图 该部分调整修改自https://juejin.cn/post/7032161243431763976
 // 获取左右按钮和图片列表
 let oLeft = document.querySelector(".left");
 let oRight = document.querySelector(".right");
@@ -130,3 +142,22 @@ oWrap.addEventListener("mouseleave", () => {
   clearInterval(autoplay);
   autoplay = setInterval(handleRightBtn, 2000);
 });
+//播放器
+function playMusic(musicSrc) {
+  var audioPlayer = document.getElementById('audioPlayer');
+  audioPlayer.src = musicSrc;
+  audioPlayer.play();
+}
+var playlist = [];//歌曲列表
+var currentTrackIndex = 0;
+function nextTrack() {
+  currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+  var nextTrackSrc = playlist[currentTrackIndex];
+  playMusic(nextTrackSrc);
+}//下一首功能
+
+function previousTrack() {
+  currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+  var previousTrackSrc = playlist[currentTrackIndex];
+  playMusic(previousTrackSrc);
+}//上一首功能
