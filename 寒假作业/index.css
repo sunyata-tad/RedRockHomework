@@ -72,12 +72,16 @@
  /*侧边栏部分的样式*/
  #main{
   flex: 1;
+  overflow: scroll;
  }
  #main>div{
   display: none;
  }
  ul{
   list-style: none;
+ }
+ #search{
+  overflow: scroll;
  }
  #wrap{
   overflow: hidden;

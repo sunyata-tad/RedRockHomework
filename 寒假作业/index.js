@@ -2,14 +2,39 @@
 async function searchsong() {
   var input = document.getElementsByClassName('searchframe');
   var keywords = input[0].value;
-  fetch('http://localhost:3000/search?keywords=${keywords}')
+  fetch('http://localhost:3000/search?keywords='+encodeURIComponent(keywords))
   .then((response) => response.json())
   .then((data) => {
-    var text = JSON.stringify(data);
-    console.log(text);
-  });
+    const songs = data.result.songs;
+    console.log(songs)
+    // 获取容器
+    const container = document.getElementById("search")
+
+    // 生成歌曲列表
+    songs.forEach(song => {
+        const songElement = document.createElement("div");
+        songElement.classList.add("song");
+        // 歌曲封面
+        const img = document.createElement("img");
+        img.src = song.artists[0].img1v1Url;
+        songElement.appendChild(img);
+
+        // 歌曲详情
+        const songDetails = document.createElement("div");
+        songDetails.classList.add("song-details");
+        songDetails.innerHTML = `
+            <div>
+                <strong>${song.name}</strong>
+                <p>${song.artists.map(artist => artist.name).join(", ")}</p>
+                <button onclick='playMusic()'>播放</button>
+            </div>
+        `;
+        songElement.appendChild(songDetails);
+
+        container.appendChild(songElement);
+    });
+  })
 }//获取歌曲信息
-'未写'
 //搜索界面
 //实现侧边栏功能的代码
 document.addEventListener("DOMContentLoaded", function() {
@@ -143,9 +168,9 @@ oWrap.addEventListener("mouseleave", () => {
   autoplay = setInterval(handleRightBtn, 2000);
 });
 //播放器
-function playMusic(musicSrc) {
+function playMusic() {
   var audioPlayer = document.getElementById('audioPlayer');
-  audioPlayer.src = musicSrc;
+  audioPlayer.src = 'https://music.163.com/song/media/outer/url?id='+encodeURIComponent(song.id)+'.mp3';
   audioPlayer.play();
 }
 var playlist = [];//歌曲列表
