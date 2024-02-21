@@ -6,31 +6,27 @@ async function searchsong() {
   .then((response) => response.json())
   .then((data) => {
     const songs = data.result.songs;
-    console.log(songs)
     // 获取容器
     const container = document.getElementById("search")
 
     // 生成歌曲列表
     songs.forEach(song => {
+      window.songId = song.id
         const songElement = document.createElement("div");
-        songElement.classList.add("song");
         // 歌曲封面
         const img = document.createElement("img");
-        img.src = song.artists[0].img1v1Url;
+        img.src = song.artists[0].img1v1Url;//没有翻到歌曲封面的接口或者url，就拿里面不知道什么图片凑数了
         songElement.appendChild(img);
-
         // 歌曲详情
         const songDetails = document.createElement("div");
-        songDetails.classList.add("song-details");
         songDetails.innerHTML = `
             <div>
                 <strong>${song.name}</strong>
                 <p>${song.artists.map(artist => artist.name).join(", ")}</p>
-                <button onclick='playMusic()'>播放</button>
+                <button onclick='addMusic()'>播放</button>
             </div>
         `;
         songElement.appendChild(songDetails);
-
         container.appendChild(songElement);
     });
   })
@@ -168,21 +164,38 @@ oWrap.addEventListener("mouseleave", () => {
   autoplay = setInterval(handleRightBtn, 2000);
 });
 //播放器
+var playlist = [];//歌曲列表
+async function addMusic(){
+  fetch('http://localhost:3000/song/url?id='+encodeURIComponent(songId))
+  .then((response) => response.json())
+  .then(data =>{
+    const songurl = data.data[0].url;
+    source.src = songurl;
+    if(playlist.includes(songurl)){
+      playMusic();
+    } 
+    else{
+      playlist.push(source.src);
+      playMusic();
+    }
+  })
+}
 function playMusic() {
   var audioPlayer = document.getElementById('audioPlayer');
-  audioPlayer.src = 'https://music.163.com/song/media/outer/url?id='+encodeURIComponent(song.id)+'.mp3';
-  audioPlayer.play();
+  audioPlayer.play()
 }
-var playlist = [];//歌曲列表
-var currentTrackIndex = 0;
+var source = document.getElementById('source');
+let currentTrackIndex = 0;
 function nextTrack() {
   currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
   var nextTrackSrc = playlist[currentTrackIndex];
-  playMusic(nextTrackSrc);
+  source.src=nextTrackSrc
+  playMusic;
 }//下一首功能
 
 function previousTrack() {
   currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
   var previousTrackSrc = playlist[currentTrackIndex];
-  playMusic(previousTrackSrc);
+  source.src=previousTrackSrc
+  playMusic();
 }//上一首功能
